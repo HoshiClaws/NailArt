@@ -209,8 +209,73 @@
           transform: scale(1.05);
         }
       }
+      /* SPARKLE */
+      .sparkle {
+        position: fixed;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        pointer-events: none;
+        background: radial-gradient(circle, #ffffff, #ffd1f4, #ff4fc3);
+        box-shadow:
+          0 0 10px #ff4fc3,
+          0 0 20px #ff4fc3;
+        animation: sparkleAnim 1s ease-out forwards;
+        z-index: 9999;
+      }
+
+      @keyframes sparkleAnim {
+        0% {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(0) translateY(-40px);
+          opacity: 0;
+        }
+      }
     </style>
   </head>
+  <script>
+    function createSparkle(x, y) {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+
+      const size = Math.random() * 10 + 8;
+      sparkle.style.width = size + "px";
+      sparkle.style.height = size + "px";
+
+      sparkle.style.left = x + (Math.random() - 0.5) * 80 + "px";
+      sparkle.style.top = y + (Math.random() - 0.5) * 80 + "px";
+
+      document.body.appendChild(sparkle);
+
+      setTimeout(() => {
+        sparkle.remove();
+      }, 1000);
+    }
+
+    // TOUCH (HP)
+    document.addEventListener("touchstart", (e) => {
+      for (let i = 0; i < 12; i++) {
+        createSparkle(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    });
+
+    // SWIPE EFFECT
+    document.addEventListener("touchmove", (e) => {
+      for (let i = 0; i < 6; i++) {
+        createSparkle(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    });
+
+    // DESKTOP
+    document.addEventListener("mousemove", (e) => {
+      if (Math.random() > 0.6) {
+        createSparkle(e.clientX, e.clientY);
+      }
+    });
+  </script>
 
   <body>
     <!-- 🐍 SNAKE BACKGROUND -->
