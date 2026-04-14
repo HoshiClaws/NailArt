@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ICON -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <title>Hoshi Claws</title>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #e78dba, #ebedee);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      /* 🐍 BACKGROUND SNAKE */
+      .snake-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .snake-path {
+        fill: none;
+        stroke: url(#gradientStroke);
+        stroke-width: 4;
+        stroke-dasharray: 20 10;
+        animation: snakeMove 3s linear infinite;
+      }
+
+      @keyframes snakeMove {
+        0% {
+          stroke-dashoffset: 0;
+        }
+        100% {
+          stroke-dashoffset: -200;
+        }
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 420px;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .logo {
+        width: 75%;
+        max-width: 280px;
+        margin-bottom: 30px;
+        animation:
+          float 3s ease-in-out infinite,
+          glow 2s ease-in-out infinite alternate;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+      }
+
+      @keyframes glow {
+        from {
+          filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+        }
+        to {
+          filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .links {
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .link-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
+        padding: 14px;
+        border-radius: 12px;
+        background: white;
+        color: #333;
+        font-weight: 600;
+        transition: 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .link-btn::before {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: #e01d9c;
+        transition: 0.3s;
+        z-index: 0;
+      }
+
+      .link-btn:hover::before {
+        width: 100%;
+      }
+
+      .link-btn:hover {
+        color: white;
+      }
+
+      .link-btn span,
+      .link-btn i {
+        position: relative;
+        z-index: 1;
+      }
+
+      .link-btn i {
+        font-size: 18px;
+      }
+
+      .footer {
+        margin-top: 20px;
+        font-size: 12px;
+        color: #888;
+      }
+
+      /* 📱 MOBILE (default sudah ok, ini penyempurnaan) */
+      body {
+        padding: 20px;
+      }
+
+      /* 📱 Tablet */
+      @media (min-width: 600px) {
+        .container {
+          max-width: 500px;
+        }
+
+        .logo {
+          max-width: 300px;
+        }
+
+        .link-btn {
+          font-size: 16px;
+          padding: 16px;
+        }
+      }
+
+      /* 💻 Laptop */
+      @media (min-width: 1024px) {
+        body {
+          padding: 40px;
+        }
+
+        .container {
+          max-width: 420px;
+        }
+
+        .logo {
+          max-width: 320px;
+        }
+
+        .links {
+          padding: 25px;
+        }
+
+        .link-btn {
+          font-size: 17px;
+          padding: 18px;
+        }
+      }
+
+      /* 🖥️ Layar besar */
+      @media (min-width: 1440px) {
+        .container {
+          transform: scale(1.05);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 🐍 SNAKE BACKGROUND -->
+    <svg class="snake-bg" viewBox="0 0 500 800" preserveAspectRatio="none">
+      <defs>
+        <linearGradient
+          id="gradientStroke"
+          x1="0"
+          y1="0"
+          x2="500"
+          y2="800"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0%" stop-color="#ff4fc3" />
+          <stop offset="50%" stop-color="#ffffff" />
+          <stop offset="100%" stop-color="#ff4fc3" />
+        </linearGradient>
+      </defs>
+
+      <path
+        d="M0,200 C150,100 350,300 500,200 
+           C350,100 150,400 0,300
+           C150,200 350,500 500,400"
+        class="snake-path"
+      />
+    </svg>
+
+    <div class="container">
+      <!-- LOGO -->
+      <img src="logo.png" alt="Hoshi Claws" class="logo" />
+
+      <!-- LINK -->
+      <div class="links">
+        <a
+          href="https://www.instagram.com/hoshiclaws_nails"
+          class="link-btn"
+          target="_blank"
+        >
+          <i class="fab fa-instagram"></i>
+          <span>Instagram</span>
+        </a>
+
+        <a href="https://wa.me/6285168657288" class="link-btn" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </a>
+
+        <a
+          href="https://www.tiktok.com/@hoshiclaws_nail"
+          class="link-btn"
+          target="_blank"
+        >
+          <i class="fab fa-tiktok"></i>
+          <span>TikTok</span>
+        </a>
+
+        <a
+          href="https://www.threads.net/@hoshiclaws_nails"
+          class="link-btn"
+          target="_blank"
+        >
+          <i class="fab fa-threads"></i>
+          <span>Threads</span>
+        </a>
+      </div>
+
+      <div class="footer">© 2026 Hoshi Claws</div>
+    </div>
+  </body>
+</html>
